@@ -9,7 +9,7 @@
         LibriSpeech data downloader :heavy_check_mark:
     </li>
     <li>
-        Whisper wrapper
+        Whisper wrapper :heavy_check_mark:
     </li>
     <li>
         Speechbrain spk_id tutorial :heavy_check_mark:
