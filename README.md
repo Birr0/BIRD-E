@@ -15,7 +15,7 @@
         Speechbrain spk_id tutorial :heavy_check_mark:
     </li>
     <li>
-        Speechbrain spk_id model :heavy_check_mark:
+        Speechbrain spk_id model
     </li>
     <li>
         Merged transcription and detection program.
