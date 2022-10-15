@@ -2,6 +2,7 @@ import whisper
 import jiwer
 
 from whisper.normalizers import EnglishTextNormalizer
+import torchaudio
 
 #https://pytorch.org/audio/0.13.0/datasets.html
 
@@ -16,20 +17,22 @@ class Whisper():
         self.options = whisper.DecodingOptions()
     
     @staticmethod
-    def format_audio(audio):
+    def format_audio(audio_path):
         '''
         Takes the raw audio input tensor and transforms it to format required by whisper.
 
         Parameters
         ----------
-        audio: tensor
+        audio_path: str
 
         Returns
         ---------
 
         formated_audio: tensor
         
+
         '''
+        audio, _ = torchaudio.load(audio_path)
         return whisper.pad_or_trim(audio.flatten())
     
     @staticmethod
@@ -55,15 +58,15 @@ class Whisper():
         normalizer = EnglishTextNormalizer()
         return jiwer.wer(normalizer(hypothesis), normalizer(ground_truth))
 
-    def transcribe(self, audio):
+    def transcribe(self, audio_path):
         '''
         Transcription of audio
 
         Parameters
         ----------
-        audio: tensor
-            Raw audio input
-
+        audio_path: str
+            path to audio file (.flac)
+            
         Returns
         ---------
         transcript: dict
@@ -71,7 +74,7 @@ class Whisper():
         '''
         # add check audio type/conversion here 
 
-        _audio = self.format_audio(audio)
+        _audio = self.format_audio(audio_path)
         return self.model.transcribe(_audio)
     
     def log_mel_spectrogram(self, audio):
